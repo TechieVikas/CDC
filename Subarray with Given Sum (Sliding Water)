@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> subarraySum(vector<int>& arr, int target) {
+    int n = arr.size();
+    int start = 0, curr_sum = 0;
+
+    for (int end = 0; end < n; end++) {
+        curr_sum += arr[end];
+
+        while (curr_sum > target && start < end)
+            curr_sum -= arr[start++];
+
+        if (curr_sum == target)
+            return {start + 1, end + 1};  // 1-based index
+    }
+
+    return {-1};
+}
+
+int main() {
+    vector<int> arr = {1, 2, 3, 7, 5};
+    int target = 12;
+    vector<int> result = subarraySum(arr, target);
+
+    if (result.size() == 1 && result[0] == -1)
+        cout << "No subarray found\n";
+    else
+        cout << "Subarray from index " << result[0] << " to " << result[1] << endl;
+
+    return 0;
+}
