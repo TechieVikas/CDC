@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> productExceptSelf(vector<int>& nums) {
+    int n = nums.size();
+    vector<int> output(n, 1);
+
+    // Step 1: Left products
+    int leftProduct = 1;
+    for (int i = 0; i < n; i++) {
+        output[i] = leftProduct;
+        leftProduct *= nums[i];
+    }
+
+    // Step 2: Right products
+    int rightProduct = 1;
+    for (int i = n - 1; i >= 0; i--) {
+        output[i] *= rightProduct;
+        rightProduct *= nums[i];
+    }
+
+    return output;
+}
+
+int main() {
+    vector<int> nums = {1, 2, 3, 4};
+    vector<int> result = productExceptSelf(nums);
+
+    cout << "Product of array except self: ";
+    for (int val : result)
+        cout << val << " ";
+    cout << endl;
+
+    return 0;
+}
