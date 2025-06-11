@@ -1,0 +1,25 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int maxDifference(vector<int>& arr) {
+    int n = arr.size();
+    if (n < 2) return 0;
+
+    int min_element = arr[0];
+    int max_diff = arr[1] - arr[0];
+
+    for (int i = 1; i < n; i++) {
+        int current_diff = arr[i] - min_element;
+        max_diff = max(max_diff, current_diff);
+        min_element = min(min_element, arr[i]);
+    }
+
+    return max_diff;
+}
+
+int main() {
+    vector<int> arr = {2, 3, 10, 6, 4, 8, 1};
+    cout << "Maximum Difference: " << maxDifference(arr) << endl;
+    return 0;
+}
