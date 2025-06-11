@@ -1,0 +1,29 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int findMinDiff(vector<int>& arr, int m) {
+    int n = arr.size();
+    if (m == 0 || n == 0 || m > n) return 0;
+
+    sort(arr.begin(), arr.end());  // Step 1: Sort
+
+    int min_diff = INT_MAX;
+
+    // Step 2: Sliding window of size m
+    for (int i = 0; i + m - 1 < n; i++) {
+        int diff = arr[i + m - 1] - arr[i];
+        min_diff = min(min_diff, diff);
+    }
+
+    return min_diff;
+}
+
+int main() {
+    vector<int> arr = {7, 3, 2, 4, 9, 12, 56};
+    int m = 3;
+
+    cout << "Minimum difference: " << findMinDiff(arr, m) << endl;
+    return 0;
+}
